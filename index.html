@@ -16,23 +16,30 @@
       --text: #0a0a0a;
       --muted: #6b7280;
       --hairline: #e5e7eb;
+      --accent: #f59e0b;
     }
 
     html, body {
-      height: 100%;
       background: var(--bg);
       color: var(--text);
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       font-style: normal;
+      overflow: hidden;
+    }
+
+    body {
+      height: 100vh;
+      height: 100dvh;
     }
 
     main {
-      min-height: 100vh;
+      height: 100vh;
+      height: 100dvh;
       display: grid;
       grid-template-rows: auto 1fr auto;
-      padding: 32px 40px;
+      padding: clamp(20px, 3vh, 36px) clamp(20px, 4vw, 56px);
       max-width: 1400px;
       margin: 0 auto;
     }
@@ -41,7 +48,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 14px;
+      font-size: clamp(12px, 1.4vw, 14px);
       color: var(--muted);
     }
 
@@ -62,7 +69,7 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #f59e0b;
+      background: var(--accent);
     }
 
     .hero {
@@ -71,24 +78,24 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 80px 20px;
-      gap: 48px;
+      gap: clamp(20px, 3.5vh, 40px);
+      min-height: 0;
     }
 
     h1 {
       font-weight: 700;
-      font-size: clamp(56px, 11vw, 168px);
-      line-height: 0.95;
-      letter-spacing: -0.04em;
+      font-size: clamp(34px, 9vw, 132px);
+      line-height: 0.96;
+      letter-spacing: -0.035em;
       max-width: 1100px;
     }
 
     h1 .accent {
-      color: #f59e0b;
+      color: var(--accent);
     }
 
     .sub {
-      font-size: clamp(18px, 1.8vw, 22px);
+      font-size: clamp(14px, 1.6vw, 19px);
       font-weight: 400;
       color: var(--muted);
       max-width: 560px;
@@ -97,31 +104,31 @@
 
     .meta-row {
       display: flex;
-      gap: 56px;
+      gap: clamp(24px, 5vw, 56px);
       flex-wrap: wrap;
       justify-content: center;
-      padding-top: 40px;
+      padding-top: clamp(16px, 3vh, 32px);
       border-top: 1px solid var(--hairline);
       width: 100%;
       max-width: 720px;
     }
 
     .meta-row > div {
-      min-width: 140px;
+      min-width: 100px;
       text-align: center;
     }
 
     .meta-label {
-      font-size: 12px;
+      font-size: clamp(10px, 1.1vw, 12px);
       font-weight: 500;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 10px;
+      margin-bottom: 6px;
     }
 
     .meta-value {
-      font-size: 22px;
+      font-size: clamp(15px, 1.8vw, 21px);
       font-weight: 600;
       color: var(--text);
       letter-spacing: -0.01em;
@@ -131,20 +138,56 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-top: 24px;
+      padding-top: clamp(12px, 2vh, 20px);
       border-top: 1px solid var(--hairline);
-      font-size: 13px;
+      font-size: clamp(11px, 1.2vw, 13px);
       color: var(--muted);
     }
 
+    /* Phones — vertical priority */
     @media (max-width: 640px) {
-      main { padding: 24px 20px; }
-      header { font-size: 12px; }
-      .hero { padding: 48px 0; gap: 36px; }
-      .meta-row { gap: 32px; padding-top: 28px; }
-      .meta-row > div { min-width: 100px; }
-      .meta-value { font-size: 18px; }
-      footer { flex-direction: column; gap: 10px; text-align: center; }
+      main { padding: 16px 18px; }
+      .hero { gap: 18px; }
+      h1 {
+        font-size: clamp(28px, 9.5vw, 56px);
+        line-height: 1.02;
+      }
+      .sub { font-size: 14px; line-height: 1.5; }
+      .meta-row {
+        gap: 14px;
+        padding-top: 16px;
+      }
+      .meta-row > div { min-width: 80px; }
+      .meta-label {
+        font-size: 9px;
+        letter-spacing: 0.06em;
+        margin-bottom: 4px;
+      }
+      .meta-value { font-size: 14px; }
+      footer {
+        flex-direction: row;
+        gap: 8px;
+        text-align: center;
+        font-size: 10px;
+      }
+    }
+
+    /* Landscape mobile / short screens */
+    @media (max-height: 520px) {
+      main { padding: 12px 24px; }
+      .hero { gap: 14px; }
+      h1 {
+        font-size: clamp(28px, 6vh, 56px);
+        line-height: 1.02;
+      }
+      .sub { font-size: 13px; line-height: 1.4; }
+      .meta-row {
+        padding-top: 12px;
+        gap: 24px;
+      }
+      .meta-label { margin-bottom: 3px; font-size: 9px; }
+      .meta-value { font-size: 14px; }
+      footer { padding-top: 10px; font-size: 11px; }
     }
   </style>
 </head>
