@@ -7,89 +7,62 @@
   <meta name="description" content="watchitnow.today is on a break until September 2026 — soccer season is over." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg-base: #0a0d12;
-      --bg-grid: #131820;
-      --pitch-green: #1b5e3c;
-      --pitch-green-dim: #0e3b25;
-      --accent: #ffffff;
-      --muted: #8a93a3;
-      --hairline: rgba(255, 255, 255, 0.08);
+      --bg: #ffffff;
+      --text: #0a0a0a;
+      --muted: #6b7280;
+      --hairline: #e5e7eb;
     }
 
     html, body {
       height: 100%;
-      background: var(--bg-base);
-      color: var(--accent);
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    /* Stadium ambience — radial vignette + faint scanline grid */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 50% 35%, rgba(27, 94, 60, 0.18), transparent 70%),
-        radial-gradient(ellipse 80% 60% at 50% 110%, rgba(255, 255, 255, 0.04), transparent 60%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(var(--hairline) 1px, transparent 1px),
-        linear-gradient(90deg, var(--hairline) 1px, transparent 1px);
-      background-size: 64px 64px;
-      mask-image: radial-gradient(circle at 50% 45%, black 30%, transparent 75%);
-      -webkit-mask-image: radial-gradient(circle at 50% 45%, black 30%, transparent 75%);
-      pointer-events: none;
-      z-index: 0;
+      -moz-osx-font-smoothing: grayscale;
+      font-style: normal;
     }
 
     main {
-      position: relative;
-      z-index: 1;
       min-height: 100vh;
       display: grid;
       grid-template-rows: auto 1fr auto;
       padding: 32px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
     }
 
     header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      letter-spacing: 0.04em;
-      font-size: 13px;
+      font-size: 14px;
       color: var(--muted);
-      text-transform: uppercase;
     }
 
     header .brand {
-      color: var(--accent);
-      font-weight: 600;
-      letter-spacing: 0.08em;
+      color: var(--text);
+      font-weight: 700;
+      letter-spacing: -0.01em;
     }
 
-    header .dot {
-      display: inline-block;
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+    }
+
+    .status .dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #f0b400;
-      margin-right: 8px;
-      vertical-align: middle;
-      box-shadow: 0 0 12px rgba(240, 180, 0, 0.6);
+      background: #f59e0b;
     }
 
     .hero {
@@ -98,111 +71,60 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      gap: 40px;
-      padding: 60px 20px;
-    }
-
-    .pitch {
-      width: 220px;
-      height: 140px;
-      position: relative;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 4px;
-      background:
-        linear-gradient(90deg, rgba(27, 94, 60, 0.18) 50%, rgba(14, 59, 37, 0.18) 50%);
-      background-size: 32px 100%;
-    }
-
-    .pitch::before {
-      content: "";
-      position: absolute;
-      top: 0; bottom: 0; left: 50%;
-      width: 1px;
-      background: rgba(255, 255, 255, 0.18);
-    }
-
-    .pitch::after {
-      content: "";
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 36px; height: 36px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 50%;
-    }
-
-    .pitch .ball {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 10px; height: 10px;
-      background: white;
-      border-radius: 50%;
-      box-shadow:
-        0 0 20px rgba(255, 255, 255, 0.5),
-        0 0 40px rgba(255, 255, 255, 0.2);
-      animation: pulse 2.6s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-      50%      { transform: translate(-50%, -50%) scale(1.4); opacity: 0.7; }
+      padding: 80px 20px;
+      gap: 48px;
     }
 
     h1 {
-      font-family: 'Instrument Serif', 'Times New Roman', serif;
-      font-weight: 400;
-      font-size: clamp(48px, 9vw, 120px);
-      line-height: 1.05;
-      letter-spacing: -0.01em;
-      max-width: 900px;
-    }
-
-    h1 em {
-      font-style: italic;
-      color: #d6ddea;
+      font-weight: 700;
+      font-size: clamp(56px, 11vw, 168px);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      max-width: 1100px;
     }
 
     h1 .accent {
-      font-style: italic;
-      color: #f0b400;
+      color: #f59e0b;
     }
 
     .sub {
-      font-size: clamp(15px, 1.6vw, 18px);
+      font-size: clamp(18px, 1.8vw, 22px);
+      font-weight: 400;
       color: var(--muted);
-      max-width: 540px;
-      line-height: 1.6;
+      max-width: 560px;
+      line-height: 1.55;
     }
 
     .meta-row {
       display: flex;
-      gap: 32px;
+      gap: 56px;
       flex-wrap: wrap;
       justify-content: center;
-      padding-top: 8px;
+      padding-top: 40px;
       border-top: 1px solid var(--hairline);
-      margin-top: 8px;
+      width: 100%;
+      max-width: 720px;
     }
 
     .meta-row > div {
-      padding-top: 20px;
       min-width: 140px;
       text-align: center;
     }
 
     .meta-label {
-      font-size: 11px;
-      letter-spacing: 0.16em;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .meta-value {
-      font-family: 'Instrument Serif', serif;
-      font-size: 24px;
-      color: var(--accent);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.01em;
     }
 
     footer {
@@ -211,30 +133,18 @@
       justify-content: space-between;
       padding-top: 24px;
       border-top: 1px solid var(--hairline);
-      font-size: 12px;
-      letter-spacing: 0.04em;
+      font-size: 13px;
       color: var(--muted);
-    }
-
-    footer a {
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    footer a:hover {
-      color: var(--accent);
     }
 
     @media (max-width: 640px) {
       main { padding: 24px 20px; }
-      header { font-size: 11px; }
-      .hero { gap: 32px; padding: 40px 0; }
-      .pitch { width: 160px; height: 100px; background-size: 24px 100%; }
-      .meta-row { gap: 16px; }
-      .meta-row > div { min-width: 100px; padding-top: 16px; }
-      .meta-value { font-size: 20px; }
-      footer { flex-direction: column; gap: 8px; text-align: center; }
+      header { font-size: 12px; }
+      .hero { padding: 48px 0; gap: 36px; }
+      .meta-row { gap: 32px; padding-top: 28px; }
+      .meta-row > div { min-width: 100px; }
+      .meta-value { font-size: 18px; }
+      footer { flex-direction: column; gap: 10px; text-align: center; }
     }
   </style>
 </head>
@@ -242,17 +152,13 @@
   <main>
     <header>
       <div class="brand">watchitnow.today</div>
-      <div><span class="dot"></span>Off-season</div>
+      <div class="status"><span class="dot"></span>Off-season</div>
     </header>
 
     <section class="hero">
-      <div class="pitch" aria-hidden="true">
-        <div class="ball"></div>
-      </div>
-
       <h1>
-        The <em>soccer season</em> is over.<br/>
-        We&rsquo;ll be back in <span class="accent">September 2026</span>.
+        Soccer season is over.<br/>
+        We'll be back in <span class="accent">September 2026</span>.
       </h1>
 
       <p class="sub">
